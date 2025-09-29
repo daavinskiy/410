@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8">
+  <title>Kaverilista</title>
+</head>
+<body>
+  <p>
+    <a href="../Versio_1/index.html">Versio 1</a>
+  </p>
+
+  <h1>Kaverilista</h1>
+
+  <input type="text" id="nimi">
+  <button id="lisaa">Lisää</button>
+  <button id="poista">Poista</button>
+  <button id="tyhjenna">Tyhjennä</button>
+  <button id="lajittele">Järjestä</button>
+
+  <ol id="kaverilista"></ol>
+
+  <script>
+    let kaverit = []
+    let nimiKentta = document.getElementById("nimi")
+    let lista = document.getElementById("kaverilista")
+    let lisaaBtn = document.getElementById("lisaa")
+    let poistaBtn = document.getElementById("poista")
+    let tyhjennaBtn = document.getElementById("tyhjenna")
+    let lajitteleBtn = document.getElementById("lajittele")
+
+    function paivitaLista() {
+      lista.innerHTML = ""
+      kaverit.forEach(kaveri => {
+        let li = document.createElement("li")
+        li.textContent = kaveri
+        lista.appendChild(li)
+      })
+    }
+
+    lisaaBtn.onclick = () => {
+      let nimi = nimiKentta.value.trim()
+      if (nimi !== "") {
+        kaverit.push(nimi)
+        nimiKentta.value = ""
+        paivitaLista()
+      }
+    }
+
+    poistaBtn.onclick = () => {
+      let nimi = nimiKentta.value.trim().toLowerCase()
+      let indeksi = kaverit.findIndex(k => k.toLowerCase() === nimi)
+      if (indeksi !== -1) {
+        kaverit.splice(indeksi, 1)
+        nimiKentta.value = ""
+        paivitaLista()
+      }
+    }
+
+    tyhjennaBtn.onclick = () => {
+      kaverit = []
+      paivitaLista()
+    }
+
+    lajitteleBtn.onclick = () => {
+      kaverit.sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()))
+      paivitaLista()
+    }
+  </script>
+</body>
+</html>

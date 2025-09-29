@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8">
+  <title>Kaverilista</title>
+</head>
+<body>
+  <p>
+    <a href="../Versio_2/index.html">Versio 2</a>
+  </p>
+
+  <h1>Kaverilista</h1>
+
+  <button id="aloita">Aloita</button>
+  <ol id="kaverilista"></ol>
+
+  <script>
+    let kaverit = []
+    let lista = document.getElementById("kaverilista")
+    let aloitaBtn = document.getElementById("aloita")
+
+    aloitaBtn.onclick = () => {
+      for (let i = 0; i < 10; i++) {
+        let nimi = prompt(`Anna kaverin nimi (${i + 1}/10):`)
+        kaverit.push(nimi === null ? "" : nimi.trim())
+      }
+
+      lista.innerHTML = ""
+      kaverit.forEach(kaveri => {
+        let li = document.createElement("li")
+        li.textContent = kaveri
+        lista.appendChild(li)
+      })
+
+      aloitaBtn.disabled = true
+    }
+  </script>
+</body>
+</html>
